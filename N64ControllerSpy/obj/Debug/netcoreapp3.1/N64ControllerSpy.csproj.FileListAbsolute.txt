@@ -26,4 +26,10 @@ C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1\N64ControllerSpy.pdb
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1\N64ControllerSpy.genruntimeconfig.cache
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\SharpDX.DirectInput.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1\N64ControllerSpy.csproj.CoreCompileInputs.cache
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\image\controller.png

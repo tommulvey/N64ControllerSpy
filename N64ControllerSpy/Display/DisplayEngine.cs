@@ -12,10 +12,10 @@ namespace N64ControllerSpy.Display
     {
         public bool IsRunning { get; private set; }
 
+        Texture2D texture;
         public DisplayEngine(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings): 
             base(gameWindowSettings,nativeWindowSettings)
         {
-
         }
 
         public bool Init()
@@ -81,6 +81,16 @@ namespace N64ControllerSpy.Display
 
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, true, 0, 0);
+
+            // FOR IMAGE
+            GL.Enable(EnableCap.Blend);
+            // GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.O);
+
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Lequal);
+
+            GL.Enable(EnableCap.Texture2D);
+            texture = Content.LoadTexture("C:\\Users\\tom\\Documents\\N64ControllerSpy\\N64ControllerSpy\\image\\controller.png");
         }
 
         // ovveride methods from gamewindow class, physics schtuff here. Run 2k times a sec.
@@ -100,9 +110,25 @@ namespace N64ControllerSpy.Display
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(0.2f, 0.2f, 0.8f, 1.0f);
 
-            // render is done with vertex then render the backup then rinse and repeat
-            GL.BindVertexArray(vao);
-            GL.DrawArrays(BeginMode.Triangles, 0, vertices.Length);
+            //// render is done with vertex then render the backup then rinse and repeat
+            //GL.BindVertexArray(vao);
+            //GL.DrawArrays(BeginMode.Triangles, 0, vertices.Length);
+
+            GL.ClearDepth(1);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
+
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Color4(1f, 1f, 1f, 1f);
+
+            GL.TexCoord2(0, 0); GL.Vertex2(0, 1);
+            GL.TexCoord2(1, 1); GL.Vertex2(1, 0);
+            GL.TexCoord2(0, 1); GL.Vertex2(0, 0);
+            GL.TexCoord2(0, 0); GL.Vertex2(0, 1);
+            GL.TexCoord2(1, 0); GL.Vertex2(1, 1);
+            GL.TexCoord2(1, 1); GL.Vertex2(1, 0);
+
             Context.SwapBuffers();
         }
 
@@ -111,5 +137,6 @@ namespace N64ControllerSpy.Display
         {
             base.OnUnload();
         }
+  
     }
 }
