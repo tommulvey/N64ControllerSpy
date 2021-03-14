@@ -8,9 +8,9 @@ namespace N64ControllerSpy
     {
         static void Main(string[] args)
         {
-            var contrallah = new N64Controller();
+            var controller = new N64Controller();
             // our first goal is to simply got our joystick inputs into the console..4Weird
-            contrallah.ReadJoyStickEvents();
+            controller.ReadJoyStickEvents();
         }
     }
 

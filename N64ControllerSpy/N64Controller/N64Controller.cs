@@ -30,11 +30,13 @@ namespace N64ControllerSpy.Controller
             }
 
             _joystick = new Joystick(_di, _deviceGuid);
+            _joystickState = new JoystickState();
         }
 
-        DirectInput _di;
-        Guid _deviceGuid = Guid.Empty;
-        Joystick _joystick;
+        private DirectInput _di;
+        private Guid _deviceGuid = Guid.Empty;
+        private Joystick _joystick;
+        private JoystickState _joystickState;
 
         public void ReadJoyStickEvents()
         {
@@ -53,19 +55,15 @@ namespace N64ControllerSpy.Controller
             while (true)
             {
                 _joystick.Poll();
+                _joystickState = _joystick.GetCurrentState(); // yaY this works!
+
                 var datas = _joystick.GetBufferedData();
                 foreach (var state in datas)
                 {
                     Console.WriteLine(state);
-                    // Console.WriteLine(state.Offset);
+                    // Console.WriteLine(_joystickState);
                 }
             }
         }
-    }
-
-    // ENUM FOR CONTROLLER EVENTS...HM 
-    // TODO : AUTO GENERATE BUTTON MAPPINGS, FOR NOW HARD CODE
-    public enum Events {
-       
     }
 }
