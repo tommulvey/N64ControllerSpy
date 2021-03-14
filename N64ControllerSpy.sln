@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N64ControllerSpy", "N64ControllerSpy\N64ControllerSpy.csproj", "{E67C8D09-FF9F-458E-AED4-90DF18427C69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N64ControllerSpy", "N64ControllerSpy\N64ControllerSpy.csproj", "{B70D2FD3-62CF-4C83-B740-EE9EE28C8E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E67C8D09-FF9F-458E-AED4-90DF18427C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E67C8D09-FF9F-458E-AED4-90DF18427C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E67C8D09-FF9F-458E-AED4-90DF18427C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E67C8D09-FF9F-458E-AED4-90DF18427C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B70D2FD3-62CF-4C83-B740-EE9EE28C8E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70D2FD3-62CF-4C83-B740-EE9EE28C8E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70D2FD3-62CF-4C83-B740-EE9EE28C8E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70D2FD3-62CF-4C83-B740-EE9EE28C8E39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD3BAB43-2ADE-458A-9657-36722F5B25D4}
+		SolutionGuid = {5AA75BFF-F79C-4878-8755-4A68F2C5ABBF}
 	EndGlobalSection
 EndGlobal

@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+using N64ControllerSpy.Controller;
 
 namespace N64ControllerSpy
 {
-    static class Program
+    class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var contrallah = new N64Controller();
+            // our first goal is to simply got our joystick inputs into the console..4Weird
+            contrallah.ReadJoyStickEvents();
         }
     }
+
 }
