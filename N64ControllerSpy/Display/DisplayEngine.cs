@@ -1,9 +1,14 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using N64ControllerSpy.Display.Shaders;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+
+// TODO :::: https://stackoverflow.com/questions/19169452/opentk-texture-not-display-the-image
 
 namespace N64ControllerSpy.Display
 {
@@ -12,7 +17,6 @@ namespace N64ControllerSpy.Display
     {
         public bool IsRunning { get; private set; }
 
-        Texture2D texture;
         public DisplayEngine(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings): 
             base(gameWindowSettings,nativeWindowSettings)
         {
@@ -48,49 +52,68 @@ namespace N64ControllerSpy.Display
         }
 
         // vertices represent the 3 dimensions and 3 coords between -1 to 1...idk this will prob be removed later.
-        float[] vertices = new float[]
+        float[] _vertices =
         {
-            -0.8f, -0.8f, 1.0f,
-             0.0f,  0.8f, 1.0f,
-             0.8f, -0.8f, 1.0f,
+            //Position          Texture coordinates
+             0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
+             0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
+            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
         };
 
-        int vao; // vertex array obj
-        int vbo; // vertix buffer obj 
+        private readonly uint[] _indices =
+        {
+            0, 1, 3,
+            1, 2, 3
+        };
+
+        private int _elementBufferObject;
+
+        private int _vertexBufferObject;
+
+        private int _vertexArrayObject;
+
+        private Shader _shader;
+
+        private Texture _texture;
 
         // Called first after RUn()
         protected override void OnLoad()
         {
+            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+            _vertexArrayObject = GL.GenVertexArray();
+            GL.BindVertexArray(_vertexArrayObject);
+
+            _vertexBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
+            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
+
+            _elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
+
+            // The shaders have been modified to include the texture coordinates, check them out after finishing the OnLoad function.
+            _shader = new Shader("Display/Shaders/shader.vert", "Display/Shaders/shader.frag");
+            _shader.Use();
+
+            // Because there's now 5 floats between the start of the first vertex and the start of the second,
+            // we modify this from 3 * sizeof(float) to 5 * sizeof(float).
+            // This will now pass the new vertex array to the buffer.
+            var vertexLocation = _shader.GetAttribLocation("aPosition");
+            GL.EnableVertexAttribArray(vertexLocation);
+            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+
+            // Next, we also setup texture coordinates. It works in much the same way.
+            // We add an offset of 3, since the first vertex coordinate comes after the first vertex
+            // and change the amount of data to 2 because there's only 2 floats for vertex coordinates
+            int texCoordLocation = _shader.GetAttribLocation("aTexCoord");
+            GL.EnableVertexAttribArray(texCoordLocation);
+            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
+
+            _texture = Texture.LoadFromFile("image/controller.png");
+            _texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
             base.OnLoad();
-
-            vao = GL.GenVertexArray();
-            // bind to gpu
-            GL.BindVertexArray(vao);
-
-            vbo = GL.GenBuffer();
-
-            // send to opengl idk
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
-
-            GL.BufferData(
-                BufferTarget.ArrayBuffer,
-                vertices.Length * sizeof(float),
-                vertices.ToArray(),
-                BufferUsageHint.StaticDraw
-            );
-
-            GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, true, 0, 0);
-
-            // FOR IMAGE
-            GL.Enable(EnableCap.Blend);
-            // GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.O);
-
-            GL.Enable(EnableCap.DepthTest);
-            GL.DepthFunc(DepthFunction.Lequal);
-
-            GL.Enable(EnableCap.Texture2D);
-            texture = Content.LoadTexture("C:\\Users\\tom\\Documents\\N64ControllerSpy\\N64ControllerSpy\\image\\controller.png");
         }
 
         // ovveride methods from gamewindow class, physics schtuff here. Run 2k times a sec.
@@ -107,29 +130,7 @@ namespace N64ControllerSpy.Display
         {
             base.OnRenderFrame(args);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            GL.ClearColor(0.2f, 0.2f, 0.8f, 1.0f);
-
-            //// render is done with vertex then render the backup then rinse and repeat
-            //GL.BindVertexArray(vao);
-            //GL.DrawArrays(BeginMode.Triangles, 0, vertices.Length);
-
-            GL.ClearDepth(1);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Color4(1f, 1f, 1f, 1f);
-
-            GL.TexCoord2(0, 0); GL.Vertex2(0, 1);
-            GL.TexCoord2(1, 1); GL.Vertex2(1, 0);
-            GL.TexCoord2(0, 1); GL.Vertex2(0, 0);
-            GL.TexCoord2(0, 0); GL.Vertex2(0, 1);
-            GL.TexCoord2(1, 0); GL.Vertex2(1, 1);
-            GL.TexCoord2(1, 1); GL.Vertex2(1, 0);
-
-            Context.SwapBuffers();
+            SwapBuffers();
         }
 
         // called when engine destructs

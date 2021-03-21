@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3OIG2sVyk3a6JhV2rpnMu27fWmeJii5DNq9elaOeat4VFE7IqV2GCoysbte0PMdWlA7fcXxGXfJ/eRy52I9f2A==",
+  "dgSpecHash": "I5kERdh9UgzF1VegP08+71o+bLZ9E+wV10KAb/uJSI7myD1aj7Kreycmr0BvoHUkv4sAFDlyD24KctL0LjqY1g==",
   "success": true,
   "projectFilePath": "C:\\Users\\tom\\Documents\\N64ControllerSpy\\N64ControllerSpy\\N64ControllerSpy.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\tom\\.nuget\\packages\\sharpdx\\4.2.0\\sharpdx.4.2.0.nupkg.sha512",
     "C:\\Users\\tom\\.nuget\\packages\\sharpdx.directinput\\4.2.0\\sharpdx.directinput.4.2.0.nupkg.sha512",
+    "C:\\Users\\tom\\.nuget\\packages\\sixlabors.imagesharp\\1.0.3\\sixlabors.imagesharp.1.0.3.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

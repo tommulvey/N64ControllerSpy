@@ -31,5 +31,8 @@ C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1\N64ControllerSpy.csproj.CoreCompileInputs.cache
 C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\image\controller.png
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\SixLabors.ImageSharp.dll
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\obj\Debug\netcoreapp3.1\N64ControllerSpy.csproj.CoreCompileInputs.cache
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\Display\Shaders\shader.frag
+C:\Users\tom\Documents\N64ControllerSpy\N64ControllerSpy\bin\Debug\netcoreapp3.1\Display\Shaders\shader.vert
