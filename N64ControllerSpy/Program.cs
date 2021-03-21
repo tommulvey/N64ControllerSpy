@@ -1,6 +1,8 @@
 ﻿using OpenTK.Windowing.Desktop;
 using N64ControllerSpy.Controller;
 using N64ControllerSpy.Display;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
 
 namespace N64ControllerSpy
 {
@@ -12,7 +14,14 @@ namespace N64ControllerSpy
             // our first goal is to simply got our joystick inputs into the console..4Weird
             // controller.ReadJoyStickEvents();
 
-            using (DisplayEngine game = new DisplayEngine(GameWindowSettings.Default, NativeWindowSettings.Default))
+            var nativeWindowSettings = new NativeWindowSettings()
+            {
+                Size = new Vector2i(600, 600),
+                Title = "n64 controller spy",
+                WindowBorder = WindowBorder.Fixed
+            };
+
+            using (DisplayEngine game = new DisplayEngine(GameWindowSettings.Default, nativeWindowSettings))
             {
                 game.Init();
                 game.Loop();

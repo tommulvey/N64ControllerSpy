@@ -67,8 +67,8 @@ namespace N64ControllerSpy.Display
 
             // Now, set the wrapping mode. S is for the X axis, and T is for the Y axis.
             // We set this to Repeat so that textures will repeat when wrapped. Not demonstrated here since the texture coordinates exactly match
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder);
 
             // Next, generate mipmaps.
             // Mipmaps are smaller copies of the texture, scaled down. Each mipmap level is half the size of the previous one

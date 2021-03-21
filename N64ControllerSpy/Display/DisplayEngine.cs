@@ -4,11 +4,6 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-
-// TODO :::: https://stackoverflow.com/questions/19169452/opentk-texture-not-display-the-image
 
 namespace N64ControllerSpy.Display
 {
@@ -55,10 +50,10 @@ namespace N64ControllerSpy.Display
         float[] _vertices =
         {
             //Position          Texture coordinates
-             0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // top right
-             0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // bottom right
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
-            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f  // top left
+             1f,  1f, 0.0f, 1.0f, 1.0f, // top right
+             1f, -1f, 0.0f, 1.0f, 0.0f, // bottom right
+            -1f, -1f, 0.0f, 0.0f, 0.0f, // bottom left
+            -1f,  1f, 0.0f, 0.0f, 1.0f  // top left
         };
 
         private readonly uint[] _indices =
@@ -116,14 +111,16 @@ namespace N64ControllerSpy.Display
             base.OnLoad();
         }
 
-        // ovveride methods from gamewindow class, physics schtuff here. Run 2k times a sec.
-        // youtube told me to do this
-        // insert shrug here
-        protected override void OnUpdateFrame(FrameEventArgs args)
+        protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            base.OnUpdateFrame(args);
+            var input = KeyboardState;
 
-            WindowTime.Delta = float.Parse(args.Time.ToString());
+            if (input.IsKeyDown(Keys.Escape))
+            {
+                Close();
+            }
+
+            base.OnUpdateFrame(e);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -142,9 +139,26 @@ namespace N64ControllerSpy.Display
             base.OnRenderFrame(e);
         }
 
+//        protected override void OnResize(ResizeEventArgs e)
+//       {
+//            GL.Viewport(0, 0, Size.X, Size.Y);
+//            base.OnResize(e);
+//        }
+
         // called when engine destructs
         protected override void OnUnload()
         {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.BindVertexArray(0);
+            GL.UseProgram(0);
+
+            GL.DeleteBuffer(_vertexBufferObject);
+            GL.DeleteBuffer(_elementBufferObject);
+            GL.DeleteVertexArray(_vertexArrayObject);
+
+            GL.DeleteProgram(_shader.Handle);
+            // Don't forget to dispose of the texture too!
+            GL.DeleteTexture(_texture.Handle);
             base.OnUnload();
         }
   
