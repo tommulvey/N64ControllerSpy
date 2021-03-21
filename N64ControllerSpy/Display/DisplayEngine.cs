@@ -126,11 +126,20 @@ namespace N64ControllerSpy.Display
             WindowTime.Delta = float.Parse(args.Time.ToString());
         }
 
-        protected override void OnRenderFrame(FrameEventArgs args)
+        protected override void OnRenderFrame(FrameEventArgs e)
         {
-            base.OnRenderFrame(args);
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+
+            GL.BindVertexArray(_vertexArrayObject);
+
+            _texture.Use(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+            _shader.Use();
+
+            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
 
             SwapBuffers();
+
+            base.OnRenderFrame(e);
         }
 
         // called when engine destructs
